@@ -9,8 +9,24 @@ export default class TheMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentLat: 0,
+      currentLong: 0
     };
   }
+
+    getLocation = () => {
+      navigator.geolocation.getCurrentPosition(this.setPosition)
+    };
+
+    setPosition = (position) => {
+      this.setState({currentLat: position.coords.latitude});
+      this.setState({currentLong: position.coords.longitude});
+      console.log(this.state);
+    };
+
+componentWillMount() {
+  this.getLocation();
+}
 
   render() {
     return (
@@ -24,7 +40,7 @@ export default class TheMap extends Component {
           type="symbol"
           id="marker"
           layout={{ "icon-image": "marker-15" }}>
-          <Feature coordinates={[-0.481747846041145, 51.3233379650232]}/>
+          <Feature coordinates={[`${this.state.currentLong}, ${this.state.currentLat}`]}/>
         </Layer>
       </Map>
     );

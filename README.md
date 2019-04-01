@@ -7,5 +7,6 @@
 - get current location
 - add in some basic menu configs
 - style
+- put api key in dotenv
 - add in some basic unit testing
 - submit
